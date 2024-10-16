@@ -1,7 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+        label, input {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <h1>Form Submission</h1>
+    <form id="submissionForm">
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required>
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <label for="driversLicense">Driver's License Number:</label>
+        <input type="text" id="driversLicense" name="driversLicense" required>
+
+        <label for="driversLicenseState">Driver's License State:</label>
+        <input type="text" id="driversLicenseState" name="driversLicenseState" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('submissionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Capture the form data
+            const company = document.getElementById('company').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const driversLicense = document.getElementById('driversLicense').value;
+            const driversLicenseState = document.getElementById('driversLicenseState').value;
+
+            // Display the form data in a printable format
+            const formData = `
+                <h2>Form Data</h2>
+                <p><strong>Company:</strong> ${company}</p>
+                <p><strong>First Name:</strong> ${firstName}</p>
+                <p><strong>Last Name:</strong> ${lastName}</p>
+                <p><strong>Driver's License Number:</strong> ${driversLicense}</p>
+                <p><strong>Driver's License State:</strong> ${driversLicenseState}</p>
+            `;
+
+            const newWindow = window.open('', '', 'width=800,height=600');
+            newWindow.document.write('<html><head><title>Form Data</title></head><body>');
+            newWindow.document.write(formData);
+            newWindow.document.write('</body></html>');
+            newWindow.document.close();
+            newWindow.print();
+        });
+    </script>
 </body>
 </html>
